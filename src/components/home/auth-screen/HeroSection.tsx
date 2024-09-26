@@ -7,7 +7,7 @@ const HeroSection = () => {
 			<div className='flex-1 flex overflow-hidden bg-[#00b0f0a6] relative justify-center items-center z-10 bg-noise'>
 				<div className='flex flex-col gap-2 px-4 xl:ml-40 text-center md:text-start font-semibold'>
 					<Image
-						src={"/GMI-NEW-Logo.jpg"}
+						src={"/GMI-New-Logo.jpg"}
 						alt='GMI Logo'
 						width={769}
 						height={182}
