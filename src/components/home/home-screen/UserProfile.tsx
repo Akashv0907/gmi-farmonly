@@ -26,16 +26,16 @@ const UserProfile = async () => {
 					</Avatar>
 
 					<div className='flex'>
-						{!currentUser?.isSubscribed && (
-							<Button asChild className='rounded-full flex gap-10'>
-								<Link href={"/pricing"}>
-									<span className='uppercase font-semibold tracking-wide'>Subscribe</span>
-								</Link>
-							</Button>
-						)}
+					{!currentUser?.isSubscribed && (
+						<Button asChild className='rounded-full flex gap-10 bg-red-500 hover:bg-red-600 text-white'>
+							<Link href={"/pricing"}>
+								<span className='uppercase font-semibold tracking-wide'>Subscribe</span>
+							</Link>
+						</Button>
+)}
 
-						{currentUser?.isSubscribed && (
-							<Button className='rounded-full flex gap-10' variant={"outline"}>
+		{currentUser?.isSubscribed && (
+							<Button className='rounded-full flex gap-10'>
 								<span className='uppercase font-semibold tracking-wide'>Subscribed</span>
 							</Button>
 						)}

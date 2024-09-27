@@ -9,7 +9,7 @@ const AuthButtons = () => {
 	return (
 		<div className='flex gap-3 flex-1 md:flex-row flex-col'>
 			<RegisterLink className='flex-1' onClick={() => setLoading(true)}>
-				<Button className='w-full' disabled={loading}>
+				<Button className={`w-full ${loading ? 'bg-red-300' : 'bg-red-400 hover:bg-red-600 text-white'}`} disabled={loading}>
 					Sign up
 				</Button>
 			</RegisterLink>
