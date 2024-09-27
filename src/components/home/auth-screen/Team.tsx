@@ -10,7 +10,7 @@ interface TeamProps {
 
 const teamList: TeamProps[] = [
 	{
-		imageUrl: "https://i.pravatar.cc/150?img=35",
+		imageUrl: "https://i.postimg.cc/Xqq1Lnw7/farmer1.jpg",
 		name: "Sarah Thompson",
 		position: "Farm Manager",
 		description: "Sarah ensures the smooth operation of the farm and ensuring the well-being of all our horses. ",

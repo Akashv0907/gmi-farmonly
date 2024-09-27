@@ -8,7 +8,7 @@ export const admin = {
 export const user = {
 	id: 123,
 	email: "user@gmail.com",
-	name: "John Doe",
+	name: "akash",
 	image: "https://avatar.iran.liara.run/public/boy?username=john",
 	isSubscribed: false,
 	createdAt: Date.now(),

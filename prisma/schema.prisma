@@ -13,7 +13,7 @@ model User {
   name         String
   image        String?
   isSubscribed Boolean @default(false)
-  customerId   String? @unique // stripe customer id
+  customerId   String? @unique 
 
   subscription Subscription?
   orders       Order[]
