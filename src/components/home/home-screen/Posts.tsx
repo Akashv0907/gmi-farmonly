@@ -44,7 +44,7 @@ const Posts = ({ isSubscribed, currentUser }: { isSubscribed: boolean; currentUs
             <p className='text-center'>
               Stay tuned for more posts from{" "}
               <span className='text-primary font-semibold text-xl'>OnlyHorse.</span> You can subscribe to
-              access exclusive content when it's available.
+              access exclusive content when it&apos;s available.
             </p>
           </div>
         </div>
