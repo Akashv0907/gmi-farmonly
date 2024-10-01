@@ -12,16 +12,20 @@ model User {
   email        String  @unique
   name         String
   image        String?
+  bio          String? // New field for user's bio
   isSubscribed Boolean @default(false)
-  customerId   String? @unique 
+  customerId   String? @unique
+  content      String? // New field for user's content
 
   subscription Subscription?
   orders       Order[]
   comments     Comment[]
   likes        Like[]
+  posts        Post[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  deletedAt DateTime? // Soft delete field
 }
 
 model Post {
@@ -29,36 +33,44 @@ model Post {
   mediaUrl  String?
   mediaType String?
   text      String
+  content   String? // New field for post's content
   userId    String
   likes     Int     @default(0)
   isPublic  Boolean @default(false)
 
   comments  Comment[]
   likesList Like[]
+  author    User       @relation(fields: [userId], references: [id])
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime? // Soft delete field
+
+  @@index([userId])
 }
 
 model Comment {
-  id     String @id @default(cuid())
-  text   String
-  userId String
-  postId String
+  id        String    @id @default(cuid())
+  text      String
+  userId    String
+  postId    String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime? // Soft delete field
 
   post Post @relation(fields: [postId], references: [id])
   user User @relation(fields: [userId], references: [id])
-
-  createdAt DateTime @default(now())
 
   @@index([postId])
   @@index([userId])
 }
 
 model Like {
-  id     String @id @default(cuid())
-  userId String
-  postId String
+  id        String    @id @default(cuid())
+  userId    String
+  postId    String
+  createdAt DateTime  @default(now())
+  deletedAt DateTime? // Soft delete field
 
   user User @relation(fields: [userId], references: [id])
   post Post @relation(fields: [postId], references: [id])
@@ -67,6 +79,7 @@ model Like {
   @@index([userId])
 }
 
+// The rest of the models remain unchanged
 model Subscription {
   id        String   @id @default(cuid())
   userId    String   @unique
@@ -87,7 +100,7 @@ model Product {
   price      Int
   isArchived Boolean @default(false)
 
-  orders Order[]
+  orders Order[] // Relationship with Order
 }
 
 model Order {

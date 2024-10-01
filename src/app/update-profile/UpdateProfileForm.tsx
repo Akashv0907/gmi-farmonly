@@ -1,14 +1,14 @@
-"use client";
+"use client"; 
 
+import { useEffect, useState } from "react";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { useMutation, useQuery } from "@tanstack/react-query";
 import { CldUploadWidget, CloudinaryUploadWidgetInfo } from "next-cloudinary";
-import { useEffect, useState } from "react";
 import { getUserProfileAction, updateUserProfileAction } from "./actions";
 import { useToast } from "@/hooks/use-toast";
 
@@ -16,6 +16,7 @@ const UpdateProfileForm = () => {
 	const [mediaUrl, setMediaUrl] = useState("");
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
+	const [bio, setBio] = useState(""); 
 	const [profileImage, setProfileImage] = useState("");
 
 	const { toast } = useToast();
@@ -45,12 +46,13 @@ const UpdateProfileForm = () => {
 
 	const handleUpdateProfile = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		updateProfile({ name, image: mediaUrl });
+		updateProfile({ name, image: mediaUrl, bio });
 	};
 
 	useEffect(() => {
 		if (userProfile) {
 			setName(userProfile.name);
+			setBio(userProfile.bio || ""); 
 		}
 	}, [userProfile]);
 
@@ -94,6 +96,14 @@ const UpdateProfileForm = () => {
 							</Tooltip>
 						</TooltipProvider>
 
+						<Label>Bio</Label>
+						<Input
+							placeholder='Write a brief bio'
+							value={bio}
+							className='my-2'
+							onChange={(e) => setBio(e.target.value)} 
+						/>
+
 						<CldUploadWidget
 							signatureEndpoint={"/api/sign-image"}
 							onSuccess={(result, { widget }) => {
@@ -124,4 +134,5 @@ const UpdateProfileForm = () => {
 		</div>
 	);
 };
+
 export default UpdateProfileForm;

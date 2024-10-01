@@ -3,8 +3,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ContentTab from "./content/ContentTab";
 import StoreTab from "./store/StoreTab";
 import AnalyticsTab from "./analytics/AnalyticsTab";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
-const Page = () => {
+const Page = async () => {
+	const { getUser } = getKindeServerSession();
+	const user = await getUser();
+
+	const isAdmin = user?.email === process.env.ADMIN_EMAIL;
+
 	return (
 		<BaseLayout renderRightPanel={false}>
 			<Tabs defaultValue='content' className='w-full mx-auto my-10 px-2 md:px-10'>
@@ -15,22 +21,27 @@ const Page = () => {
 					<TabsTrigger value='store' className='w-full md:w-auto'>
 						Store
 					</TabsTrigger>
-					<TabsTrigger value='analytics' className='w-full md:w-auto'>
-						Analytics
-					</TabsTrigger>
+					{isAdmin && ( 
+						<TabsTrigger value='analytics' className='w-full md:w-auto'>
+							Analytics
+						</TabsTrigger>
+					)}
 				</TabsList>
 
 				<TabsContent value='content'>
 					<ContentTab />
 				</TabsContent>
 				<TabsContent value='store'>
-					<StoreTab/>
+					<StoreTab />
 				</TabsContent>
-				<TabsContent value='analytics'>
-					<AnalyticsTab/>
-				</TabsContent>
+				{isAdmin && ( 
+					<TabsContent value='analytics'>
+						<AnalyticsTab isAdmin={isAdmin} />
+					</TabsContent>
+				)}
 			</Tabs>
 		</BaseLayout>
 	);
 };
+
 export default Page;
