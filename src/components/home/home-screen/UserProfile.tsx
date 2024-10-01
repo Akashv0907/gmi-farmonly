@@ -13,7 +13,7 @@ const UserProfile = async () => {
   });
 
   const currentUser = await getUserProfileAction();
-
+  
   const isAdmin = currentUser?.email === admin?.email;
 
   return (
@@ -36,7 +36,7 @@ const UserProfile = async () => {
               ) : (
                 <Button asChild className='rounded-full flex gap-10 bg-red-500 hover:bg-red-600 text-white'>
                   <Link href={"/pricing"}>
-                    <span className='uppercase font-semibold tracking-wide'>subscribe</span>
+                    <span className='uppercase font-semibold tracking-wide'>Subscribe</span>
                   </Link>
                 </Button>
               )}
